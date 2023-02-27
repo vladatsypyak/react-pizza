@@ -11,7 +11,7 @@ export const Categories = (props)=>{
     return         <div className="categories">
         <ul>
             {categories.map((el, i)=>{
-                return <li onClick={()=> onClickCategory(i)} className={activeIndex === i ? "active" : ""}>{el}</li>
+                return <li key={i} onClick={()=> onClickCategory(i)} className={activeIndex === i ? "active" : ""}>{el}</li>
             })}
         </ul>
     </div>

@@ -5,7 +5,7 @@ export const Pizzas = ()=>{
     return           <div className="content__items">
 
         {pizzasDb.pizzas.map((el)=>{
-            return   <PizzaBlock pizzaInfo={el}/>
+            return   <PizzaBlock key={el.id} pizzaInfo={el}/>
         })}
     </div>
 }

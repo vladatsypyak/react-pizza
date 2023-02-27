@@ -18,14 +18,14 @@ export const PizzaBlock = ({pizzaInfo}) => {
             <ul>
                 {
                     types.map(type => {
-                        return <li onClick={()=> setActiveType(type)} className={type === activeType ? "active" : ""}>{typeNames[type]}</li>
+                        return <li key={type} onClick={()=> setActiveType(type)} className={type === activeType ? "active" : ""}>{typeNames[type]}</li>
                     })
                 }
             </ul>
             <ul>
 
                 {sizes.map((size, i) => {
-                    return <li onClick={()=> setActiveSize(i)} className={i === activeSize ? "active" : ""}>{size} см.</li>
+                    return <li key={i} onClick={()=> setActiveSize(i)} className={i === activeSize ? "active" : ""}>{size} см.</li>
                 })}
             </ul>
         </div>
