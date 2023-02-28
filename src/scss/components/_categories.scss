@@ -1,8 +1,14 @@
 @import '../variables';
 
 .categories {
+  //margin-top: 30px;
+  //width: 785px;
+  //overflow: scroll;
+
   ul {
     display: flex;
+    flex-wrap: wrap;
+    //width: 785px;
 
     li {
       background-color: #f9f9f9;
@@ -28,4 +34,5 @@
       }
     }
   }
+
 }
