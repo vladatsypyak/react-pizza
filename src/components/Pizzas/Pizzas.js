@@ -11,8 +11,9 @@ export const Pizzas = ({categoryId, sortType, searchValue}) => {
     useEffect(() => {
         const order = sortType.sortProperty.includes("-") ? "asc" : "desc";
         const sortBy = sortType.sortProperty.replace("-", "");
-        const category = categoryId > 0 ? `category=${categoryId}` : ""
-        fetch(`https://63fccae08ef914c5559fa9a6.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}`
+        const category = categoryId > 0 ? `category=${categoryId}` : "";
+        const search = searchValue ? `&search=${searchValue}` : ""
+        fetch(`https://63fccae08ef914c5559fa9a6.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`
         )
             .then((res) => {
                 return res.json()
@@ -22,7 +23,7 @@ export const Pizzas = ({categoryId, sortType, searchValue}) => {
                 setIsLoading(false)
                 window.scrollTo(0, 0)
             })
-    }, [categoryId, sortType])
+    }, [categoryId, sortType, searchValue])
 
     const pizzasArr = pizzas.filter(obj => {
         console.log(obj)
