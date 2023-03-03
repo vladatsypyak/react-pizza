@@ -3,7 +3,7 @@ import {Sort} from "../components/Sort/Sort";
 import {Pizzas} from "../components/Pizzas/Pizzas";
 import {useState} from "react";
 
-export const Home = ()=>{
+export const Home = ({searchValue})=>{
     const [categoryId, setCategory] = useState(0)
     const [sortType, setSortType] = useState({
         name: "популярності",
@@ -16,7 +16,7 @@ export const Home = ()=>{
                 <Sort value={sortType} onChangeSort={(i)=> setSortType(i)}/>
             </div>
             <h2 className="content__title">Все пиццы</h2>
-            <Pizzas categoryId={categoryId} sortType={sortType}/>
+            <Pizzas searchValue={searchValue} categoryId={categoryId} sortType={sortType}/>
         </>
     )
 }

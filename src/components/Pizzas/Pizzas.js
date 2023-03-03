@@ -3,14 +3,16 @@ import {PizzaBlock} from "./PizzaBlock/PizzaBlock";
 import {useEffect, useState} from "react";
 import Skeleton from "./PizzaBlock/Skeleton";
 
-export const Pizzas = ({categoryId, sortType}) => {
+export const Pizzas = ({categoryId, sortType, searchValue}) => {
     const [pizzas, setPizzas] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+
+
     useEffect(() => {
-        const order = sortType.sortProperty.includes("-") ? "asc" :  "desc";
+        const order = sortType.sortProperty.includes("-") ? "asc" : "desc";
         const sortBy = sortType.sortProperty.replace("-", "");
-        const category = categoryId > 0 ? `category=${categoryId}`: ""
-        fetch(  `https://63fccae08ef914c5559fa9a6.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}`
+        const category = categoryId > 0 ? `category=${categoryId}` : ""
+        fetch(`https://63fccae08ef914c5559fa9a6.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}`
         )
             .then((res) => {
                 return res.json()
@@ -21,11 +23,19 @@ export const Pizzas = ({categoryId, sortType}) => {
                 window.scrollTo(0, 0)
             })
     }, [categoryId, sortType])
+
+    const pizzasArr = pizzas.filter(obj => {
+        console.log(obj)
+        return !!obj.name.toLowerCase().includes(searchValue.toLowerCase());
+
+    })
+        .map((el) => {
+            return <PizzaBlock key={el.id} pizzaInfo={el}/>
+        })
     return <div className="content__items">
 
-        {isLoading ? [...new Array(6)].map((el, i) => <Skeleton key={i}/>) : pizzas.map((el) => {
-            return <PizzaBlock key={el.id} pizzaInfo={el}/>
-        })}
+        {isLoading ? [...new Array(6)].map((el, i) => <Skeleton key={i}/>) : pizzasArr
+        }
 
     </div>
 }
